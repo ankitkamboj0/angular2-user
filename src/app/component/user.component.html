@@ -1,0 +1,27 @@
+<div>
+    <h1>name:{{name}}</h1>
+    <h2>Email:{{email}}</h2>
+    <h3>Address is:{{address.street}},{{address.pin}}</h3>
+    <button (click)="toggleHobbies()">{{showHobbies ? "Hide Hobbies" : "Show Hobbies"}}</button>
+
+    <div *ngIf="showHobbies">
+        <ul>
+            <li *ngFor="let hobby of hobbies; let i = index">
+                {{hobby}}<button (click)="remove(i)">*{{i}}</button>
+            </li>
+        </ul>
+        <form (submit)="addHobby(hoby.value)">
+            <input name="hobb" #hoby />
+        </form>
+    </div>
+    <form>
+        Email : <input name="eml" [(ngModel)]="email" />
+    </form>
+    <h3>Dynamic picked posts</h3>
+    <div *ngFor="let post of posts;">
+        <p>Title: {{post.title}}</p>
+        <p>id: {{post.id}}</p>
+        <p>Body: {{post.body}}</p>
+    </div>
+
+</div>

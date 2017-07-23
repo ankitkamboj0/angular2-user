@@ -3,28 +3,7 @@ import { postServices } from '../services/posts.service';
 
 @Component({
   selector: 'user',
-  template: `
-  <div>
-    <h1>name:{{name}}</h1>
-    <h2>Email:{{email}}</h2>
-    <h3>Address is:{{address.street}},{{address.pin}}</h3>
-    <button (click)="toggleHobbies()">{{showHobbies ? "Hide Hobbies" : "Show Hobbies"}}</button>
-    
-    <div *ngIf="showHobbies">
-        <ul>
-            <li *ngFor= "let hobby of hobbies; let i = index">
-                {{hobby}}<button (click)="remove(i)">*{{i}}</button>
-            </li>
-        </ul>
-        <form (submit)="addHobby(hoby.value)">
-            <input name="hobb" #hoby />
-        </form>
-    </div>
-    <form>
-        Email : <input name="eml" [(ngModel)]="email"/>
-    </form>
-  </div>
-  `,
+  templateUrl:'user.component.html',
   providers : [postServices],
 })
 export class UserComponent {
@@ -33,19 +12,19 @@ export class UserComponent {
   address: address;
  hobbies: string[];
  showHobbies : boolean;
+ posts :post[];
   constructor(private post : postServices){
       this.name = 'Rajan Gupta';
       this.email = 'rajan01@gmail.com';
       this.address = {
           street:'Modal Town',
-          pin:'112200',
+          pin:112200,
           contact:'Rajan',
-
       }
         this.hobbies = ['Cricket','Movies','Ram Leela','Khunchusna'];
         this.showHobbies = false;
         this.post.getPosts().subscribe(poss =>{
-                console.log(poss)
+            this.posts = poss;
         });
 
   }
@@ -70,6 +49,12 @@ addHobby(hobby){
 }
  interface address{
       street:string,
-      pin:string,
+      pin:number,
       contact:string,
   }
+    interface post{
+        id:number;
+        body:string;
+        title:string;
+        userId:number;
+       }
