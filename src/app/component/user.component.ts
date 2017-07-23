@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { postServices } from '../services/posts.service';
+import { PostServices } from '../services/posts.service';
 
 @Component({
   selector: 'user',
   templateUrl:'user.component.html',
-  providers : [postServices],
+  providers : [PostServices],
 })
 export class UserComponent {
   name:string;
@@ -13,7 +13,7 @@ export class UserComponent {
  hobbies: string[];
  showHobbies : boolean;
  posts :post[];
-  constructor(private post : postServices){
+  constructor(private post : PostServices){
       this.name = 'Rajan Gupta';
       this.email = 'rajan01@gmail.com';
       this.address = {
